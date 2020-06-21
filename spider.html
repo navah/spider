@@ -19,6 +19,9 @@
 
 <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="horizontal-stripe-3" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nMTAnIGhlaWdodD0nMycgZmlsbD0nYmxhY2snIC8+Cjwvc3ZnPg==" x="0" y="0" width="10" height="10"> </image> </pattern> </defs> </svg>
 
+
+<svg class="filter-green" height="5" width="5" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter-green" fill="red" style="fill: #e232a1;"> <defs> <pattern id="lightstripe" patternUnits="userSpaceOnUse" width="5" height="5" class="filter-green" fill="red" style="fill: #e232a1;"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzUnPgogIDxyZWN0IHdpZHRoPSc1JyBoZWlnaHQ9JzUnIGZpbGw9J3doaXRlJy8+CiAgPHBhdGggZD0nTTAgNUw1IDBaTTYgNEw0IDZaTS0xIDFMMSAtMVonIHN0cm9rZT0nIzg4OCcgc3Ryb2tlLXdpZHRoPScxJy8+Cjwvc3ZnPg==" x="0" y="0" width="5" height="5" class="filter-green" fill="red" style="fill: #e232a1;"> </image> </pattern> </defs> </svg>
+
 	</head>
 	<body>
 
@@ -80,7 +83,7 @@ opacityArea: 0.15,
 //The size of the colored circles of each blog
 dotRadius: 4,
 //The opacity of the circles of each blob
-opacityCircles: 0.1,
+opacityCircles: 0.0,
 //The width of the stroke around each blob
 strokeWidth: 1,
 //If true the area and stroke will follow a round path (cardinal-closed)
@@ -89,12 +92,14 @@ roundStrokes: false,
 color: d3.scale.category10(),
 
 //nav: circle line color
-circleColor: "#a4a4a4",
+circleColor: "#8e8d8d",
 //nav: spoke color
-spokeColor: "#bbbbbb",
+spokeColor: "#8b8888",
 circleWeight: 1.25,
 spokeWeight: 1.25,
 hoverOpacity: 0.4
+//nav: patterns
+
 };
 
 //Put all of the options into a variable called cfg
@@ -393,65 +398,75 @@ var margin = {top: 100, right: 100, bottom: 100, left: 100},
 
 ////////////////////////// Data //////////////////////////////
 
+var categories = ["acting", "dialogue", "hair + makeup", "wardrobe", "creative use of language to avoid swears", "victimization of a female character", "property"]
+
 var data = [
+
 		[//color-1
-		{axis:"hair + makeup",value:3},
-		{axis:"victimization of a female character",value:2},
-		{axis:"acting",value:1},
-		{axis:"wardrobe",value:1},
-		{axis:"dialogue",value:2.5},
-		{axis:"creative replacement of swears",value:4.5},
-		{axis:"property",value:4.5}
+		{axis:categories[0],value:3},
+		{axis:categories[1],value:2},
+		{axis:categories[2],value:1},
+		{axis:categories[3],value:1},
+		{axis:categories[4],value:2.5},
+		{axis:categories[5],value:4.5},
+		{axis:categories[6],value:5},
 		],
-		[//color-2
-		{axis:"hair + makeup",value:5},
-		{axis:"victimization of a female character",value:2.5},
-		{axis:"acting",value:1.5},
-		{axis:"wardrobe",value:5},
-		{axis:"dialogue",value:3.5},
-		{axis:"creative replacement of swears",value:1.5},
-		{axis:"property",value:5}
+
+		[//color-1
+		{axis:categories[0],value:5},
+		{axis:categories[1],value:2.5},
+		{axis:categories[2],value:1.5},
+		{axis:categories[3],value:5},
+		{axis:categories[4],value:3.5},
+		{axis:categories[5],value:1.5},
+		{axis:categories[6],value:1.5},
 		],
-		[//color-3
-		{axis:"hair + makeup",value:1},
-		{axis:"victimization of a female character",value:2.5},
-		{axis:"acting",value:1},
-		{axis:"wardrobe",value:4},
-		{axis:"dialogue",value:3.5},
-		{axis:"creative replacement of swears",value:2},
-		{axis:"property",value:5}
+
+		[//color-1
+		{axis:categories[0],value:1},
+		{axis:categories[1],value:2.5},
+		{axis:categories[2],value:1},
+		{axis:categories[3],value:4},
+		{axis:categories[4],value:3.5},
+		{axis:categories[5],value:2},
+		{axis:categories[6],value:3},
 		]
+
 		];
 
 
 	var data1 = [
+
 			[//color-1
-			{axis:"hair + makeup",value:2},
-			{axis:"victimization of a female character",value:5},
-			{axis:"acting",value:3},
-			{axis:"wardrobe",value:2},
-			{axis:"dialogue",value:4.5},
-			{axis:"creative replacement of swears",value:4.5},
-			{axis:"property",value:3}
+			{axis:categories[0],value:1},
+			{axis:categories[1],value:2},
+			{axis:categories[2],value:4},
+			{axis:categories[3],value:2},
+			{axis:categories[4],value:2},
+			{axis:categories[5],value:2.5},
+			{axis:categories[6],value:5},
 			],
-			[//color-2
-			{axis:"hair + makeup",value:3},
-			{axis:"victimization of a female character",value:3},
-			{axis:"acting",value:1},
-			{axis:"wardrobe",value:2},
-			{axis:"dialogue",value:3},
-			{axis:"creative replacement of swears",value:4},
-			{axis:"property",value:5}
+
+			[//color-1
+			{axis:categories[0],value:5},
+			{axis:categories[1],value:4.5},
+			{axis:categories[2],value:5},
+			{axis:categories[3],value:4},
+			{axis:categories[4],value:3},
+			{axis:categories[5],value:3.5},
+			{axis:categories[6],value:1},
 			],
-			[//color-3
-			{axis:"hair + makeup",value:1},
-			{axis:"victimization of a female character",value:3.5},
-			{axis:"acting",value:5},
-			{axis:"wardrobe",value:3},
-			{axis:"dialogue",value:4.5},
-			{axis:"creative replacement of swears",value:2},
-			{axis:"property",value:4}
+
+			[//color-1
+			{axis:categories[0],value:5},
+			{axis:categories[1],value:2.5},
+			{axis:categories[2],value:4},
+			{axis:categories[3],value:2},
+			{axis:categories[4],value:1.5},
+			{axis:categories[5],value:1},
+			{axis:categories[6],value:1},
 			]
+
 			];
 
 
@@ -459,11 +474,10 @@ var data = [
 //////////////////// Draw the Chart //////////////////////////
 
 var color = d3.scale.ordinal()
-	.range(["#ff71be","#ff8e32","#ffe220","#ff6361","#ffa600"]);
+	.range(["#ff40f7","#fff35b","#51ff42"]);
 
 
-var patternFill = d3.scale.ordinal()
-	.range(["url(#horizontal-stripe-3)","#5fba03","#471bd9"]);
+//var pattern = ["url(#horizontal-stripe-3)","#fff35b","#51ff42"];
 
 
 
@@ -485,7 +499,7 @@ RadarChart(".radarChart", data, radarChartOptions);
 
 
 var color1 = d3.scale.ordinal()
-	.range(["#51ed7c","#0facac","#063d70"]);
+	.range(["#67ff9b","#73a2ff","#cb4dff"]);
 
 var radarChartOptions1 = {
   w: width,
