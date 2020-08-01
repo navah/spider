@@ -1,33 +1,84 @@
+:root {
+  --text-color: #c1c1c1;
+}
+
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
     font-weight: 300;
-    fill: #242424;
+    fill: var(--text-color);
     text-align: center;
     /* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; */
     cursor: default;
 }
 
 .legend {
-    font-family: 'Raleway', sans-serif;
-    fill: #333333;
+    font-family: 'Arial', sans-serif;
+    fill: var(--text-color);
+    font-size: 13px;
 }
 
 .tooltip {
-    fill: #333333;
+    fill: var(--text-color);
+    background: blue;
+    font-size: 16px;
 }
+
+.tooltip::before {
+    fill: var(--text-color);
+    background: blue;
+    font-size: 16px;
+    content: "moo";
+}
+
+.filter-green{
+        filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+    }
 
 
 /*-----------------------
 "plot-grid (mobile)"
 -----------------------*/
 
-.plot-grid {
+/* .plot-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 100px;
   grid-row-gap: .5rem;
   grid-column-gap: .5rem;
+}
+
+
+.plot-cell {
+    border: 1px solid black;
+    background: #626262;
+}
+
+.plot-cell-title {
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 5px 0px;
+    font-size: 1.8rem;
+    color: var(--text-color);
+} */
+
+/* navah grid shit  */
+
+.plot-grid {
+    display: grid;
+    width: 80%;
+    grid-template-columns: auto auto;
+    grid-auto-rows: auto;
+    grid-gap: 10px;
+    margin: auto;
+    padding: 40px;
+    background: #777;
+}
+
+.plot-cell {
+    border: 1px solid black;
+    background: #222;
+    padding: 30px;
 }
 
 
@@ -40,14 +91,19 @@ body {
 
 @media only screen and (min-width: 992px) {
 
-.grid {
+/* .plot-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  grid-row-gap: .5rem;
+  grid-column-gap: .5rem;
 }
 
 
+ */
 
 
 
-.plot-cell {
-    border: 1px solid black;
-    background: #ebe8e8;
+
+
 }

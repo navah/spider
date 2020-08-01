@@ -17,17 +17,14 @@
 
 
 
-<svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="horizontal-stripe-3" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nMTAnIGhlaWdodD0nMycgZmlsbD0nYmxhY2snIC8+Cjwvc3ZnPg==" x="0" y="0" width="10" height="10"> </image> </pattern> </defs> </svg>
 
-
-<svg class="filter-green" height="5" width="5" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter-green" fill="red" style="fill: #e232a1;"> <defs> <pattern id="lightstripe" patternUnits="userSpaceOnUse" width="5" height="5" class="filter-green" fill="red" style="fill: #e232a1;"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzUnPgogIDxyZWN0IHdpZHRoPSc1JyBoZWlnaHQ9JzUnIGZpbGw9J3doaXRlJy8+CiAgPHBhdGggZD0nTTAgNUw1IDBaTTYgNEw0IDZaTS0xIDFMMSAtMVonIHN0cm9rZT0nIzg4OCcgc3Ryb2tlLXdpZHRoPScxJy8+Cjwvc3ZnPg==" x="0" y="0" width="5" height="5" class="filter-green" fill="red" style="fill: #e232a1;"> </image> </pattern> </defs> </svg>
 
 	</head>
 	<body>
 
 
 
-<div class="plot-grid">
+<!-- <div class="plot-grid">
 
 
 	<div class="plot-cell">
@@ -38,12 +35,19 @@
 		<div class="radarChart1"></div>
 	</div>
 
+	<div class="plot-cell">
+	</div>
 
 
-<!-- end plot-grid (container) -->
+</div> -->
+
+<div class='plot-grid'>
+
+    <div class='plot-cell c1'></div>
+
+    <div class='plot-cell c2'></div>
+
 </div>
-
-
 
 <!-- <script src="spiderChart.js"></script> -->
 <!-- uncomment when done -->
@@ -54,47 +58,45 @@
 
 <script>
 
-/////////////////////////////////////////////////////////
-/////////////// The Radar Chart Function ////////////////
-/////////////// Written by Nadieh Bremer ////////////////
-////////////////// VisualCinnamon.com ///////////////////
-/////////// Inspired by the code of alangrafu ///////////
-/////////////////////////////////////////////////////////
+
 
 function RadarChart(id, data, options) {
 
+var lineColor = "#959595";
+var textColor = "#cbcbcb"
+
 var cfg = {
-//Width of the circle
-w: 400,
-//Height of the circle
-h: 400,
-//The margins of the SVG
+// circle width
+w: 300,
+// height of the circle
+h: 300,
+// the margins of the SVG
 margin: {top: 20, right: 20, bottom: 20, left: 20},
-//How many levels or inner circles should there be drawn
+// tow many levels or inner circles should there be drawn
 levels: 3,
-//What is the value that the biggest circle will represent
+// that is the value that the biggest circle will represent
 maxValue: 0,
-//How much farther than the radius of the outer circle should the labels be placed
+// how much farther than the radius of the outer circle should the labels be placed
 labelFactor: 1.35,
-//The number of pixels after which a label needs to be given a new line
+// the number of pixels after which a label needs to be given a new line
 wrapWidth: 100,
-//The opacity of the area of the blob
+// the opacity of the area of the blob
 opacityArea: 0.15,
-//The size of the colored circles of each blog
+// the size of the colored circles of each blog
 dotRadius: 4,
-//The opacity of the circles of each blob
+// the opacity of the circles of each blob
 opacityCircles: 0.0,
-//The width of the stroke around each blob
+// the width of the stroke around each blob
 strokeWidth: 1,
-//If true the area and stroke will follow a round path (cardinal-closed)
+// if true the area and stroke will follow a round path (cardinal-closed)
 roundStrokes: false,
-//Color function
+// color function
 color: d3.scale.category10(),
 
 //nav: circle line color
-circleColor: "#8e8d8d",
+circleColor: lineColor,
 //nav: spoke color
-spokeColor: "#8b8888",
+spokeColor: lineColor,
 circleWeight: 1.25,
 spokeWeight: 1.25,
 hoverOpacity: 0.4
@@ -102,21 +104,27 @@ hoverOpacity: 0.4
 
 };
 
-//Put all of the options into a variable called cfg
+// put all of the options into a variable called cfg
 if('undefined' !== typeof options){
-for(var i in options){
-if('undefined' !== typeof options[i]){ cfg[i] = options[i]; }
-}//for i
-}//if
+	for(var i in options){
+		if('undefined' !== typeof options[i]){ cfg[i] = options[i]; }
+	} // for i in options loop
+} // if undefined
 
-//If the supplied maxValue is smaller than the actual one, replace by the max in the data
+// if the supplied maxValue is smaller than the actual one, replace by the max in the data
 var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
 
-var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
-total = allAxis.length,					//The number of different axes
-radius = Math.min(cfg.w/2, cfg.h/2), 	//Radius of the outermost circle
-Format = d3.format(''),			 	//Percentage formatting (used to be a '%')
-angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
+var allAxis = (data[0].map(function(i, j){return i.axis})),
+// names of each axis
+total = allAxis.length,
+//The number of different axes
+radius = Math.min(cfg.w/2, cfg.h/2),
+// radius of the outermost circle
+Format = d3.format(''),
+// percentage formatting (used to be a '%')
+
+angleSlice = Math.PI * 2 / total;
+// the width in radians of each "slice"
 
 //Scale for the radius
 var rScale = d3.scale.linear()
@@ -184,7 +192,7 @@ axisGrid.selectAll(".axisLabel")
 .attr("dy", "-0.2em")
 .style("font-size", "14px")
 // nav: text color
-.attr("fill", "#ffffff")
+.attr("fill", textColor)
 .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
 
 
@@ -398,9 +406,9 @@ var margin = {top: 100, right: 100, bottom: 100, left: 100},
 
 ////////////////////////// Data //////////////////////////////
 
-var categories = ["acting", "dialogue", "hair + makeup", "wardrobe", "creative use of language to avoid swears", "victimization of a female character", "property"]
+var categories = ["acting", "dialogue", "hair + makeup", "wardrobe", "creative use of language to avoid censorship", "victimization of a female character", "music"]
 
-var data = [
+var data1 = [
 
 		[//color-1
 		{axis:categories[0],value:3},
@@ -435,7 +443,7 @@ var data = [
 		];
 
 
-	var data1 = [
+	var data2 = [
 
 			[//color-1
 			{axis:categories[0],value:1},
@@ -470,6 +478,53 @@ var data = [
 			];
 
 
+	var data6 = [
+	  {
+	    className: 'germany', // optional can be used for styling
+	    axes: [
+	      {axis: "strength", value: 13},
+	      {axis: "intelligence", value: 6},
+	      {axis: "charisma", value: 5},
+	      {axis: "dexterity", value: 9},
+	      {axis: "luck", value: 2}
+	    ]
+	  },
+	  {
+	    className: 'argentina',
+	    axes: [
+	      {axis: "strength", value: 6},
+	      {axis: "intelligence", value: 7},
+	      {axis: "charisma", value: 10},
+	      {axis: "dexterity", value: 13},
+	      {axis: "luck", value: 9}
+	    ]
+	  }
+	];
+
+	var data7 = [
+	  {
+	    className: 'germany', // optional can be used for styling
+	    axes: [
+	      {axis: "strength", value: 3},
+	      {axis: "intelligence", value: 16},
+	      {axis: "charisma", value: 15},
+	      {axis: "dexterity", value: 19},
+	      {axis: "luck", value: 12}
+	    ]
+	  },
+	  {
+	    className: 'argentina',
+	    axes: [
+	      {axis: "strength", value: 16},
+	      {axis: "intelligence", value: 17},
+	      {axis: "charisma", value: 1},
+	      {axis: "dexterity", value: 3},
+	      {axis: "luck", value: 19}
+	    ]
+	  }
+	];
+
+
 
 //////////////////// Draw the Chart //////////////////////////
 
@@ -492,7 +547,7 @@ var radarChartOptions = {
   dotRadius: 3
 };
 //Call function to draw the Radar chart
-RadarChart(".radarChart", data, radarChartOptions);
+RadarChart(".c1", data1, radarChartOptions);
 
 
 
@@ -512,12 +567,22 @@ var radarChartOptions1 = {
   dotRadius: 3
 };
 //Call function to draw the Radar chart
-RadarChart(".radarChart1", data1, radarChartOptions1);
+RadarChart(".c2", data2, radarChartOptions1);
 </script>
 
 
 
 
+
+<script>
+// RadarChart.draw(".c1", data);
+// RadarChart(".c1", data0, radarChartOptions1);
+</script>
+
+
+<!-- <script>
+RadarChart.draw(".c2", data0);
+</script> -->
 
 </body>
 </html>
