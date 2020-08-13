@@ -139,6 +139,8 @@ var rScale = d3.scale.linear()
 //Remove whatever chart with the same id/class was present before
 d3.select(id).select("svg").remove();
 
+// var toolTip;
+
 //Initiate the radar chart SVG
 var svg = d3.select(id).append("svg")
 	.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
@@ -151,7 +153,7 @@ var g = svg.append("g")
 
 
 
-////////// Glow filter for some extra pizzazz ///////////
+////////// glow filter ///////////
 
 //Filter for the outside glow
 var filter = g.append('defs').append('filter').attr('id','glow'),
@@ -163,7 +165,7 @@ feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
 
 
 
-/////////////// Draw the Circular grid //////////////////
+/////////////// draw the circular grid //////////////////
 
 //Wrapper for the grid & axes
 var axisGrid = g.append("g").attr("class", "axisWrapper");
@@ -198,7 +200,7 @@ axisGrid.selectAll(".axisLabel")
 
 
 
-//////////////////// Draw the axes //////////////////////
+//////////////////// draw the axes //////////////////////
 
 //Create the straight lines radiating outward from the center
 var axis = axisGrid.selectAll(".axis")
@@ -232,7 +234,7 @@ axis.append("text")
 
 
 
-///////////// Draw the radar chart blobs ////////////////
+///////////// draw the soft blobs ////////////////
 
 //The radial line function
 var radarLine = d3.svg.line.radial()
@@ -305,7 +307,14 @@ var blobCircleWrapper = g.selectAll(".radarCircleWrapper")
 .enter().append("g")
 .attr("class", "radarCircleWrapper");
 
+
+
 //Append a set of invisible circles on top for the mouseover pop-up
+
+// d3.select("body").append("div")
+//     .attr("class", "tooltip")
+//     .style("opacity", 0);
+
 blobCircleWrapper.selectAll(".radarInvisibleCircle")
 .data(function(d,i) { return d; })
 .enter().append("circle")
@@ -319,24 +328,77 @@ blobCircleWrapper.selectAll(".radarInvisibleCircle")
 	newX =  parseFloat(d3.select(this).attr('cx')) - 10;
 	newY =  parseFloat(d3.select(this).attr('cy')) - 10;
 
+
+	toola
+	.style('left', newX + "px")
+	.style('top', newY + "px")
+
+	.transition().duration(200)
+
+	.style('opacity', 1);
+
 	tooltip
+		.attr("class", "tooltip")
 		.attr('x', newX)
 		.attr('y', newY)
-		.text(Format(d.value))
+
+		// .text('<div class="tooltip-box">hi</div>')
 		.transition().duration(200)
+		// .style("display", "inline-block")
+		// .style('height', '40px')
 		.style('opacity', 1);
+
+	tooltext
+	.attr('x', newX)
+	.attr('y', newY)
+	.text(Format(d.value))
+	.transition().duration(200)
+	.style('opacity', 1);
+
+
+
+		// g.append("text")
+		// .style("fill", "yellow")
+		// .style("stroke", "white")
+		// // .style("stroke-width", 3)
+		// .attr('x', newX)
+		// .attr('y', newY)
+		// .text(Format(d.value))
+		// .style('opacity', 1);
+		// // .text(Format(d.value));
 })
 .on("mouseout", function(){
 	tooltip.transition().duration(200)
 		.style("opacity", 0);
+	tooltext.transition().duration(200)
+		.style("opacity", 0);
+	toola.transition().duration(200)
+		.style("opacity", 0);
 });
 
 //Set up the small tooltip for when you hover over a circle
-var tooltip = g.append("text")
-.attr("class", "tooltip")
-.style("opacity", 0);
+// var tooltip = g.append("text")
+// .attr("class", "tooltip")
+// .style("fill", "red")
+// .style("display", "block")
+// .style("border", 2)
+// .style("stroke", "white")
+// .style("stroke-width", 3)
+// .style("opacity", 0);
 
+var tooltip = g.append("rect")
+		.attr("class", "tooltip")
+    	.attr("fill", "red")
+    	.attr("stroke", "black")
+		.style("opacity", 0);
 
+var tooltext = g.append("text")
+		.attr("class", "tooltip")
+		.style("opacity", 0);
+
+var toola = d3.select(id).append("div")
+	.attr("class", "tooltip-box")
+	.style("opacity", 0);
 
 
 /////////////////// Helper Function /////////////////////
@@ -371,9 +433,15 @@ while (word = words.pop()) {
 
 
 
+
+
+
 }//wrap
 
 }//RadarChart
+
+
+
 
 
 </script> <!-- end temporarily inline script -->
@@ -406,7 +474,17 @@ var margin = {top: 100, right: 100, bottom: 100, left: 100},
 
 ////////////////////////// Data //////////////////////////////
 
-var categories = ["acting", "dialogue", "hair + makeup", "wardrobe", "creative use of language to avoid censorship", "victimization of a female character", "music"]
+var categories = ["acting",
+"believability of the world and characters",
+"dialogue",
+"hair + makeup",
+"wardrobe",
+"creative use of language to avoid censorship",
+"victimization of a female character",
+"font",
+"plotholes",
+"crying"
+]
 
 var data1 = [
 
@@ -418,6 +496,9 @@ var data1 = [
 		{axis:categories[4],value:2.5},
 		{axis:categories[5],value:4.5},
 		{axis:categories[6],value:5},
+		{axis:categories[7],value:3},
+		{axis:categories[8],value:2.5},
+		{axis:categories[9],value:3},
 		],
 
 		[//color-1
@@ -428,6 +509,9 @@ var data1 = [
 		{axis:categories[4],value:3.5},
 		{axis:categories[5],value:1.5},
 		{axis:categories[6],value:1.5},
+		{axis:categories[7],value:3},
+		{axis:categories[8],value:2.5},
+		{axis:categories[9],value:3},
 		],
 
 		[//color-1
@@ -438,6 +522,9 @@ var data1 = [
 		{axis:categories[4],value:3.5},
 		{axis:categories[5],value:2},
 		{axis:categories[6],value:3},
+		{axis:categories[7],value:3},
+		{axis:categories[8],value:2.5},
+		{axis:categories[9],value:3},
 		]
 
 		];
