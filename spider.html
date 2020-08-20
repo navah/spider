@@ -10,7 +10,7 @@
 
 		<!-- Google fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
 
 		<!-- D3.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
@@ -24,22 +24,7 @@
 
 
 
-<!-- <div class="plot-grid">
 
-
-	<div class="plot-cell">
-		<div class="radarChart"></div>
-	</div>
-
-	<div class="plot-cell">
-		<div class="radarChart1"></div>
-	</div>
-
-	<div class="plot-cell">
-	</div>
-
-
-</div> -->
 
 <div class='plot-grid'>
 
@@ -59,14 +44,14 @@
 
 function RadarChart(id, data, options) {
 
-var lineColor = "#959595";
-var textColor = "#cbcbcb"
+var lineColor = "#999";
+var textColor = "#333"
 
 var cfg = {
 
 
 // circle width
-w: Math.min(500, window.innerWidth - 10) - margin.left - margin.right,
+w: Math.min(pixels, window.innerWidth - 10) - margin.left - margin.right,
 
 // circle height
 h: Math.min(width, window.innerHeight - margin.top - margin.bottom - 20),
@@ -147,7 +132,7 @@ var rScale = d3.scale.linear()
 
 
 
-//////////// creat the container SVG and g /////////////
+//////////// create the container SVG and g /////////////
 
 // remove whatever chart with the same id/class was present before
 d3.select(id).select("svg").remove();
@@ -156,8 +141,9 @@ d3.select(id).select("svg").remove();
 
 // init radar svg
 var svg = d3.select(id).append("svg")
-	.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
-	.attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
+	// .attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
+	// .attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
+	.attr("viewBox", `0 0 ${pixels} ${pixels}`)
 	.attr("class", "radar"+id);
 // append a group
 var g = svg.append("g")
@@ -193,8 +179,8 @@ axisGrid.selectAll(".levels")
 .attr("r", function(d, i){return radius/cfg.levels*d;})
 .style("stroke", cfg.circleColor)
 .style("fill-opacity", cfg.opacityCircles)
-// .style("filter" , "url(#glow)");
 .style("filter" , "none");
+// .style("filter" , "url(#glow)");
 
 // append level texts
 axisGrid.selectAll(".axisLabel")
@@ -233,7 +219,7 @@ axis.append("line")
 // append axis labels
 axis.append("text")
 .attr("class", "legend")
-.style("font-size", "12px")
+// .style("font-size", "12px")
 .attr("text-anchor", "middle")
 .attr("dy", "0.35em")
 .attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
@@ -429,11 +415,7 @@ while (word = words.pop()) {
 
 
 
-//////////////////////// Set-Up //////////////////////////////
 
-var margin = {top: 100, right: 100, bottom: 100, left: 100},
-	width = Math.min(500, window.innerWidth - 10) - margin.left - margin.right,
-	height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
 
 
@@ -534,35 +516,55 @@ var data1 = [
 
 
 
-//////////////////// Draw the Chart //////////////////////////
+//////////////////////// Set-Up //////////////////////////////
+
+var margin = {top: 100, right: 100, bottom: 100, left: 100},
+	width = Math.min(500, window.innerWidth - 10) - margin.left - margin.right,
+	height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+// var color = d3.scale.ordinal()
+// 	.range(["#ff40f7","#fff35b","#51ff42"]);
+//
+// var color1 = d3.scale.ordinal()
+// 	.range(["#67ff9b","#73a2ff","#cb4dff"]);
 
 var color = d3.scale.ordinal()
-	.range(["#ff40f7","#fff35b","#51ff42"]);
+	.range(["#be402a","#94af11","#278a9c"]);
+
+var color1 = d3.scale.ordinal()
+	.range(["#3deb00","#4098ff","#fe14df"]);
+
+var pixels = 500;
 
 
 //var pattern = ["url(#horizontal-stripe-3)","#fff35b","#51ff42"];
 
-
+//////////////////// Draw the Chart //////////////////////////
 
 var radarChartOptions = {
+  pixels: pixels,
   color: color
 };
+
+
+
+var radarChartOptions1 = {
+  pixels: pixels,
+  color: color1
+};
+
 //Call function to draw the Radar chart
 RadarChart(".c1", data1, radarChartOptions);
 
-
-
-
-
-var color1 = d3.scale.ordinal()
-	.range(["#67ff9b","#73a2ff","#cb4dff"]);
-
-var radarChartOptions1 = {
-  margin: margin,
-  color: color1
-};
 //Call function to draw the Radar chart
 RadarChart(".c2", data2, radarChartOptions1);
+
+
+
+
+
+
+
 </script>
 
 
