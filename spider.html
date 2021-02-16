@@ -1,61 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<title>Spider Charts</title>
 
-
-		<link rel="stylesheet" href="spiderStyle.css">
+		<link rel="stylesheet" href="stylesheet.css">
 		<link rel="stylesheet" href="patternFills.css">
 
 		<!-- Google fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-
-
-
-
 	</head>
 	<body>
 
-
 		<!-- D3.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 		<script type="text/javascript" src="js/plot.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 
 
-<div class='plot-grid'>
 
+		<div class='plot-grid'>
 
-	    <div class='plot-cell c1'>
+			<div class='plot-cell c1'></div>
+
+			<div class='plot-cell c2'></div>
 		</div>
 
-
-	    <div class='plot-cell c2'>
-		</div>
+		<div class='print'></div>
 
 
 
-<script>
-//Call function to draw the Radar chart
-RadarChart(".c1", data1, radarChartOptions);
+			<!-- <script> RadarChart.draw(".c2", data0); </script> -->
 
-//Call function to draw the Radar chart
-RadarChart(".c2", data2, radarChartOptions1);
-
-
-</script>
-
-
-
-
-<!-- <script>
-RadarChart.draw(".c2", data0);
-</script> -->
-
-</body>
-</html>
+		</body>
+	</html>
