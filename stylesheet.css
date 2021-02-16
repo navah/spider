@@ -102,7 +102,7 @@ body {
 }
 
 .tooltip-box {
-  background: white;
+  /* background: white; */
   padding: 5px;
   border-radius: 10px;
   width: 40px;

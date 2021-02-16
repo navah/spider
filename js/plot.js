@@ -350,6 +350,8 @@ function RadarChart(id, data, options) {
         .attr("class", "tooltip-box")
         .style('left', (d3.event.pageX + 15) + "px")
         .style('top', (d3.event.pageY + 15) + "px")
+        // .style("background", cfg.color(i))
+        // .style("background", d.color)
         .text(Format(d.value))
         .transition()
         .duration(200)
@@ -361,11 +363,24 @@ function RadarChart(id, data, options) {
         .duration(200)
         .style("opacity", 0);
     });
-  var tooltip = d3
-    .selectAll(id)
-    .append("div")
-    .attr("class", "tooltip-box")
-    .style("opacity", 0);
+
+// TODO: finish matching tooltip-box to color
+    var tooltip = d3
+      .selectAll(id)
+      .append("div")
+      .attr("class", "tooltip-box")
+      .style("background", 'red')
+      .style("opacity", 0.0);
+
+  // var tooltip = d3
+  //   .selectAll(id)
+  //   .append("div")
+  //   .attr("class", "tooltip-box")
+  //   .style("background", cfg.color(i))
+  //   // .style("background", function(d, i, j) {
+  //   //   return cfg.color(j);
+  //   // })
+  //   .style("opacity", 0.0);
 
 
   // ----------------------------
