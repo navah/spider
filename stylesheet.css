@@ -1,5 +1,3 @@
-
-
 :root {
   --bg-color: #fff;
   --bg-light: #888888;
@@ -9,117 +7,104 @@
   --card-border: #333;
   --bright-red: #52092c;
   --bright-blue: #53dd36;
-
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    fill: yellow;
-    text-align: center;
-    cursor: default;
+  font-family: "Arial", sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  fill: yellow;
+  text-align: center;
+  cursor: default;
 }
-
-
 
 .print {
   border: 1px solid red;
   min-height: 100px;
-
 }
 
 /*-----------------------
 "plot-grid (mobile)"
 -----------------------*/
 
-
 .plot-grid {
-    display: grid;
-    width: 90%;
-    grid-template-columns: auto;
-    grid-auto-rows: auto;
-    grid-gap: 50px;
-    margin: auto;
-    padding: 40px;
-    background: var(--bg-color);
+  display: grid;
+  width: 90%;
+  grid-template-columns: auto;
+  grid-auto-rows: auto;
+  grid-gap: 50px;
+  margin: auto;
+  padding: 40px;
+  background: var(--bg-color);
 }
 
-
 .plot-cell-card {
-    border: 3px solid var(--card-border);
+  border: 3px solid var(--card-border);
 }
 
 .plot-cell-card-base {
-    background: var(--card-border);
-    min-height: 20px;
-    padding: 3%;
+  background: var(--card-border);
+  min-height: 20px;
+  padding: 3%;
 }
 
 .plot-cell {
-    border: 0px solid black;
-    background: var(--cell-color);
-    padding: 10px;
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+  border: 0px solid black;
+  background: var(--cell-color);
+  padding: 10px;
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 
 .block-title {
-    font-size: 28px;
-    display: block;
-    color: white;
-    font-family: 'Avenir Next';
-    line-height: 1.2;
-    text-align: left;
+  font-size: 28px;
+  display: block;
+  color: white;
+  font-family: "Avenir Next";
+  line-height: 1.2;
+  text-align: left;
 }
 
 .block-sub-title {
-    font-size: 22px;
-    display: block;
-    color: white;
-    font-family: 'Avenir Next';
-    line-height: 1.2;
-    text-align: left;
-
+  font-size: 22px;
+  display: block;
+  color: white;
+  font-family: "Avenir Next";
+  line-height: 1.2;
+  text-align: left;
 }
-
 
 /*-----------------------*/
 /* ! plot-grid (desktop) */
 /*-----------------------*/
 
 @media only screen and (min-width: 992px) {
-
-
-.plot-grid {
-  grid-template-columns: auto auto;
+  .plot-grid {
+    grid-template-columns: auto auto;
+  }
 }
-
-}
-
 
 .legend {
-    font-family: 'Arial', sans-serif;
-    fill: var(--text-color);
-    font-size: 15px;
+  font-family: "Arial", sans-serif;
+  fill: var(--text-color);
+  font-size: 15px;
 }
-
 
 /*-----------------------*/
 /* ! tooltipz            */
 /*-----------------------*/
 
 .tooltip {
-    display: block;
-    background: blue;
-    color: orange;
+  display: block;
+  background: blue;
+  color: orange;
 
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .tooltip-box {
-    background: white;
-    padding: 5px;
-    border-radius: 10px;
-    width: 40px;
-    position: absolute;
+  background: white;
+  padding: 5px;
+  border-radius: 10px;
+  width: 40px;
+  position: absolute;
 }
